@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       redirect_to user_path(@user.id)
+      session[:user_id] = @user.id
     else
       #renderでなく、redirect_toだとどのような動きになるか試したい => アクションを起こさない（HTTPリクエストなし）
       render :new
@@ -17,6 +18,6 @@ class UsersController < ApplicationController
   end
   private
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
   end
 end

@@ -1,6 +1,8 @@
-<h4>以下の名前とメールアドレスで登録しています</h4>
-<p><%= @user.name %></p>
+<h4><%= @user.name %>さんの登録内容は次のとおりです</h4>
 <p>メールアドレス：<%= @user.email %></p>
+<p><%= @user.name %>さんのイメージ画像</p>
+<p><%= image_tag @user.image.url %></p>
+
 
 <% if logged_in? %>
   <p><%= link_to '一覧へ', feeds_path %></p>
