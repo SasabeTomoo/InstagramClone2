@@ -16,6 +16,18 @@ class UsersController < ApplicationController
     #パラメータが飛ぶところ、params[:id]をもとに、そのidに紐づくデータをデータベースから取得
     @user = User.find(params[:id])
   end
+  def edit
+    @user = User.find(params[:id])
+  end
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+    # idごとのuserのshowページには、下記urlの引数として、そのidが必要
+      redirect_to user_path(@user.id), notice: "プロフィールを編集しました！"
+    else
+      render :edit
+    end
+  end
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)

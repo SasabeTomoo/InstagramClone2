@@ -1,7 +1,9 @@
-<h4><%= @user.name %>さんの登録内容は次のとおりです</h4>
+<h4><%= @user.name %>さんのプロフィールは次のとおりです</h4>
 <p>メールアドレス：<%= @user.email %></p>
-<p><%= @user.name %>さんのイメージ画像</p>
+<p><%= @user.name %>さんのプロフィール画像</p>
 <p><%= image_tag @user.image.url %></p>
+
+<p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
 
 
 <% if logged_in? %>
