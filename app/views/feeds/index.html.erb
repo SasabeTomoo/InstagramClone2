@@ -16,15 +16,13 @@
   <tbody>
     <% @feeds.each do |feed| %>
       <tr>
-        <td><%= feed.user.name %></td>
+        <td>
+          <a><%= link_to "#{feed.user.name}", user_path(feed.user_id) %></a>
+        </td>
         <td><%= image_tag feed.image.url %></td>
         <td><%= feed.title %></td>
         <td><%= feed.content %></td>
-        <td><%= link_to 'Show', feed %></td>
-        <% if logged_in? %>
-          <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-          <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
+        <td><%= link_to '詳細画面', feed %></td>
       </tr>
     <% end %>
   </tbody>

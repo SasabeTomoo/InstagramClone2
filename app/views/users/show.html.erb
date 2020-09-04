@@ -3,8 +3,9 @@
 <p><%= @user.name %>さんのプロフィール画像</p>
 <p><%= image_tag @user.image.url %></p>
 
-<p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
-
+<% if current_user.id == @user.id %>
+  <p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
+<% end %>
 
 <% if logged_in? %>
   <p><%= link_to '一覧へ', feeds_path %></p>

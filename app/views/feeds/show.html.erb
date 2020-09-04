@@ -1,15 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h4>[タイトル]</h4>
-<h4><%= @feed.title %></h4>
-<h4>[内容]</h4>
-<h4><%= @feed.content %></h4>
+<h4>投稿者  : <%= @feed.user.name %></h4>
+<h4>タイトル: <%= @feed.title %></h4>
+<h4>内容    : <%= @feed.content %></h4>
 <p>
-  <strong>Image:</strong>
   <%= image_tag @feed.image.url %>
 </p>
-<% if logged_in? %>
-  <%= link_to 'Edit', edit_feed_path(@feed) %>
+<% if current_user.id == @feed.user_id %>
+  <td><%= link_to 'Edit', edit_feed_path(@feed) %>
+  <td><%= link_to 'Destroy', feed_path(@feed.id), method: :delete, data: { confirm: '削除して大丈夫ですか?' } %></td>
 <% end %>
 <%= link_to 'Back', feeds_path %>
 

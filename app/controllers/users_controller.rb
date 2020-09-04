@@ -25,11 +25,11 @@ class UsersController < ApplicationController
   end
   # updateアクションは編集された内容で、データを更新する。機能的には、createと同じ位置付け。アクションがhttp入力で起こるのではなく、form_withのボタンで起こる。
   def update
-    # 一行目のparamsで飛んでいる値は、データベース内（Userモデルを使用して作成されたインスタンス）から、取り出した値。取り出し方は、urlのリクエストをリンクなどで押した覚えはないので、editのform_withに入力したパラメーターが飛んでいると思う（パラメーターの中の入力値は異なるが、idは同じなので、そのidだけを使いデータベースから更新対象のデータを特定していると思う）。
+    # 一行目のparamsで飛んでいる値は、データベース内（Userモデルを使用して作成されたインスタンス）から、取り出した値。取り出し方は、urlのリクエストをリンクなどで押した覚えはないので、editのform_withに入力したパラメーターが飛んでいると思う（パラメーターの中の入力値は異なるが、idは同じなので、そのidだけを使いデータベースから更新対象のデータを特定していると思う）。→binding.pryでparams確かめたところ、その理解でOK。
     # updateアクションの時は、その前に、変数でupdateの対象を特定しないといけない。
     # @user = User.find(params[:id])
     # editのform_withフォームで入力した値のパラメーターが、user_paramsに入っている。その値を変数を挟んで、データベースに登録する。
-    if @user.update(user_params)
+    if current_user.id == @user.id && @user.update(user_params)
     # idごとのuserのshowページには、下記urlの引数として、そのidが必要
       redirect_to user_path(@user.id), notice: "プロフィールを編集しました！"
     else
