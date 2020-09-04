@@ -22,7 +22,9 @@
         <td><%= image_tag feed.image.url %></td>
         <td><%= feed.title %></td>
         <td><%= feed.content %></td>
+        <% if logged_in? %>
         <td><%= link_to '詳細画面', feed %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
