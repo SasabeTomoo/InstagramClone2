@@ -33,7 +33,7 @@ class FeedsController < ApplicationController
     @feed.user_id = current_user.id
     if @feed.save
       FeedMailer.feed_mail(@feed.user).deliver
-      redirect_to feed_path(@feed.id), notice: '記事の投稿ができました'
+      redirect_to feeds_path, notice: '記事の投稿ができました'
     else
       render :new_feed_path
     end
