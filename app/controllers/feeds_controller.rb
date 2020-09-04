@@ -31,16 +31,11 @@ class FeedsController < ApplicationController
   def create
     @feed = Feed.new(feed_params)
     @feed.user_id = current_user.id
-
-    respond_to do |format|
-      if @feed.save
-        FeedMailer.feed_mail(@feed.user).deliver
-        format.html { redirect_to @feed, notice: '記事の投稿ができました' }
-        format.json { render :show, status: :created, location: @feed }
-      else
-        format.html { render :new }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
+    if @feed.save
+      FeedMailer.feed_mail(@feed.user).deliver
+      redirect_to feed_path(@feed.id), notice: '記事の投稿ができました'
+    else
+      render :new_feed_path
     end
   end
 
