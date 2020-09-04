@@ -1,13 +1,12 @@
 <h4><%= @user.name %>さんのプロフィールは次のとおりです</h4>
+<% if current_user.id == @user.id %>
+  <p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
+<% end %>
 <p>メールアドレス：<%= @user.email %></p>
 <p><%= @user.name %>さんのプロフィール画像</p>
 <p><%= image_tag @user.image.url %></p>
 
-<% if current_user.id == @user.id %>
-  <p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
-<% end %>
-
 <% if logged_in? %>
-  <p><%= link_to '一覧へ', feeds_path %></p>
-  <p><%= link_to '新規投稿へ', new_feed_path %></p>
+  <p><%= link_to '記事の一覧へ', feeds_path %></p>
+  <p><%= link_to '記事を新規投稿する', new_feed_path %></p>
 <% end %>

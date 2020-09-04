@@ -1,0 +1,8 @@
+<h2>お気に入り投稿画像</h2>
+
+<table>
+<% @favorites.each do |favorite| %>
+  <p><%= favorite.user.name %>さんが投稿した画像</p>
+  <a><%= image_tag favorite.image.url %></a>
+<% end %>
+</table>
