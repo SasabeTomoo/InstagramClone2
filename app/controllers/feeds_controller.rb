@@ -10,7 +10,11 @@ class FeedsController < ApplicationController
   # GET /feeds/1
   # GET /feeds/1.json
   def show
-    @favorite = current_user.favorites.find_by(feed_id: @feed.id)
+    if logged_in?
+      @favorite = current_user.favorites.find_by(feed_id: @feed.id)
+    else
+      redirect_to new_session_path
+    end
   end
 
   # GET /feeds/new

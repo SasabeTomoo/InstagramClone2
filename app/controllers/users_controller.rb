@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:edit, :update]
   def new
     @user = User.new
   end
@@ -17,6 +17,12 @@ class UsersController < ApplicationController
     #パラメータが飛ぶところ、params[:id]をもとに、そのidに紐づく一つのデータをデータベースから取得
     # その一つのデータを変数として定義し、それぞれのshow・edit・updateアクションのviewに渡す。
     # @user = User.find(params[:id])
+    # ログインせずに、showのurlダイレクト入力されるとエラーが出てしまうのでこちらで対応
+    if logged_in?
+      @user = User.find(params[:id])
+    else
+      redirect_to new_session_path
+    end
   end
     # editアクションは編集する内容を入力させるアクション
   def edit
