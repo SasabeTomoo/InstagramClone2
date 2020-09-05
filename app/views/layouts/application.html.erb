@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FacebookClone</title>
+    <title>InstagramClone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,7 +14,7 @@
     <% end %>
     <% if logged_in? %>
       <header>
-        <a>画像やコメントを投稿しよう</a>
+        <a>[InstagramClone]  画像やコメントを投稿しよう</a>
         <%= link_to '[一覧へ]', feeds_path %>
         <%= link_to '[新規投稿へ]', new_feed_path %>
         <%= link_to '[お気に入り一覧へ]', favorites_path %>
@@ -24,7 +24,7 @@
       <p class="login"><%= @current_user.name %>さん（<%= @current_user.email %>）は、現在ログイン中です<p>
     <% else %>
     <header>
-      <a>ログインして、画像やコメントを投稿しよう</a>
+      <p>[InstagramClone] ログインして、画像やコメントを投稿しよう</p>
     </header>
       <p class="login">現在ログインしていません</p>
       <%= link_to "Sign up", new_user_path %>
