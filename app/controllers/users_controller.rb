@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
       session[:user_id] = @user.id
     else
-      #renderでなく、redirect_toだとどのような動きになるか試したい => アクションを起こさない（HTTPリクエストなし）
+    #renderでなく、redirect_toだとどのような動きになるか試したい: アクションを起こさない（HTTPリクエストなし）
       render :new
     end
   end
@@ -18,12 +18,12 @@ class UsersController < ApplicationController
     # その一つのデータを変数として定義し、それぞれのshow・edit・updateアクションのviewに渡す。
     # @user = User.find(params[:id])
   end
-  # editアクションは編集する内容を入力させるアクション
+    # editアクションは編集する内容を入力させるアクション
   def edit
     # editへのhttpリクエスト（edit画面へのリンク）が押された時のパラメータ（各idの指定あり）で、編集するデータ（データベース内）を特定し、変数に渡す。
     # @user = User.find(params[:id])
   end
-  # updateアクションは編集された内容で、データを更新する。機能的には、createと同じ位置付け。アクションがhttp入力で起こるのではなく、form_withのボタンで起こる。
+    # updateアクションは編集された内容で、データを更新する。機能的には、createと同じ位置付け。アクションがhttp入力で起こるのではなく、form_withのボタンで起こる。
   def update
     # 一行目のparamsで飛んでいる値は、データベース内（Userモデルを使用して作成されたインスタンス）から、取り出した値。取り出し方は、urlのリクエストをリンクなどで押した覚えはないので、editのform_withに入力したパラメーターが飛んでいると思う（パラメーターの中の入力値は異なるが、idは同じなので、そのidだけを使いデータベースから更新対象のデータを特定していると思う）。→binding.pryでparams確かめたところ、その理解でOK。
     # updateアクションの時は、その前に、変数でupdateの対象を特定しないといけない。
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :image)
   end
-  # idをキーとして値を取得するメソッドを追加
+    # idをキーとして値を取得するメソッドを追加
   def set_user
     @user = User.find(params[:id])
   end

@@ -1,7 +1,7 @@
 <h4><%= @user.name %>さんのプロフィールは次のとおりです</h4>
-<% if current_user.id == @user.id %>
-  <p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
-<% end %>
+  <% if current_user.id == @user.id %>
+    <p><%= link_to 'プロフィールを編集する', edit_user_path(@user) %> </p>
+  <% end %>
 <p>メールアドレス：<%= @user.email %></p>
 <p><%= @user.name %>さんのプロフィール画像</p>
 <p><%= image_tag @user.image.url %></p>

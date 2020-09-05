@@ -4,7 +4,6 @@
     <title>InstagramClone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -12,6 +11,7 @@
     <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
+
     <% if logged_in? %>
       <header>
         <a>[InstagramClone]  画像やコメントを投稿しよう</a>
@@ -23,9 +23,9 @@
       <%= link_to "Logout", session_path(current_user.id), method: :delete %>
       <p class="login"><%= @current_user.name %>さん（<%= @current_user.email %>）は、現在ログイン中です<p>
     <% else %>
-    <header>
-      <p>[InstagramClone] ログインして、画像やコメントを投稿しよう</p>
-    </header>
+      <header>
+        <p>[InstagramClone] ログインして、画像やコメントを投稿しよう</p>
+      </header>
       <p class="login">現在ログインしていません</p>
       <%= link_to "Sign up", new_user_path %>
       <%= link_to "Login", new_session_path %>

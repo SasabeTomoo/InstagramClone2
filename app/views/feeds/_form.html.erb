@@ -3,11 +3,10 @@
     <% if feed.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(feed.errors.count, "error") %> prohibited this feed from being saved:</h2>
-
         <ul>
-        <% feed.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+          <% feed.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
         </ul>
       </div>
     <% end %>
@@ -27,6 +26,6 @@
       <%= form.submit %>
     </div>
   <% end %>
-  <% else %>
-    <h3>ログインしないと、画像やコメントの投稿・編集はできません</h3>
+<% else %>
+  <h3>ログインしないと、画像やコメントの投稿・編集はできません</h3>
 <% end %>
