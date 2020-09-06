@@ -1,15 +1,5 @@
 <h1>Sign up</h1>
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-<%= form_with(model: @user, local: true) do |f| %>
+<%= form_with(model: User.new, local: true) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :email %>
@@ -19,7 +9,7 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
   <%= f.label :image %>
-  <%= image_tag(@user.image.url) if @user.image && @user.image.url %>
+  <%= image_tag(User.new.image.url) if User.new.image && User.new.image.url %>
   <%= f.file_field :image %>
   <%= f.hidden_field :image_cache %>
   <%= f.submit %>

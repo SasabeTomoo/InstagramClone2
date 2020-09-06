@@ -9,7 +9,9 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
       session[:user_id] = @user.id
     else
-    #renderでなく、redirect_toだとどのような動きになるか試したい: アクションを起こさない（HTTPリクエストなし）
+    #renderでなく、redirect_toだとどのような動きになるか試したい: アクションを起こす（HTTPリクエストにより）。新ページになるので、記述していたものは消える。また、エラーメッセージも出ない（飛ばされる）。
+    # renderは他のアクションのテンプレートをそのまま利用する時に使用する。そのため、引数はアクション名(recirect_to と違い、url(prefix)ではない)
+      # redirect_to new_user_path
       render :new
     end
   end
@@ -21,7 +23,10 @@ class UsersController < ApplicationController
     if logged_in?
       @user = User.find(params[:id])
     else
-      redirect_to new_session_path
+      # renderとredirect_toの違いとして、アクションがあるかどうか。アクションがない場合、viewに対して変数を渡すことができない。そうすると、rende :new（newアクションによるview（ただし、さらにrenderして_form.html.erbが表示））ではその先が変数が必要なform_withメソッドがあるため、エラーとなる（newアクションでは、form_withに変数@user = User.new を渡している。変数にしなければよいが、その分面倒（ただし、_form_html.erbにて、@user = User.newの変数を使わず、form_withに直接User.newを使えば、rende :newでも表示できた））。
+      # また、他のコントロールのviewを表示させたい場合、renderでは難しくなる。render :newのnewはあくまでusers_controllerのnewアクション。下記のように、new_session_pathというsession_controllerのurlのviewの表示は難しい（できない？）。
+      render :new
+      # redirect_to new_session_path
     end
   end
     # editアクションは編集する内容を入力させるアクション
